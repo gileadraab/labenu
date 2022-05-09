@@ -1,0 +1,3 @@
+#Aprendizados da semana
+
+Esta semana aprendi sobre como funciona o **terminal**, as diferenças entre terminal e interface grafica bem como alguns dos benefícios de utilizar essa ferramenta. Aprendi também alguns comandos uteis de terminal utilizando o gitBash como por exemplo: **echo, grap, clear, cd, mkdir, mv, head, tail e rm**. Na aula de quinta aprendi sobre **git** e **git hub**, a sua utilidade como ferramenta para fazer o gerenciamento de versões e também para  a realização de trabalhos colaborativos. Aprendi também alguns comandos importantes do git como **git clone, git status, git add, git commit, git checkout, git pull**.  Finalmente aprendi também como funcionam as **branches** de um projeto e também como fazer um **pull request** para o github.
