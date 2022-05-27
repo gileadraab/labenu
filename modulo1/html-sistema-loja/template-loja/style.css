@@ -1,0 +1,42 @@
+header {
+    text-align: center  ;
+}
+
+#links{
+    background-color: rgb(77, 76, 76);
+    padding-top: 15px;
+    padding-bottom: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: smaller;
+    text-align: center;
+    
+}
+
+a{
+    color: #aaa4a4;
+    text-decoration: none;
+}
+
+a:hover{
+    color: rgb(219, 217, 214);
+}
+
+#title{
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 0.5px 0.5px #a3a3a3;
+    margin: 2vw;
+}
+
+#image-home{
+    text-align: center;
+}
+
+#home {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 2vw;
+}
+
+.social-network{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
