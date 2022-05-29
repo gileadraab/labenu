@@ -1,15 +1,16 @@
+/* Estilos gerais */
 header {
-    text-align: center  ;
+    text-align: center;
 }
 
 #links{
     background-color: rgb(77, 76, 76);
     padding-top: 15px;
     padding-bottom: 5px;
+    word-spacing: 60px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: smaller;
-    text-align: center;
-    
+    text-align: center;    
 }
 
 a{
@@ -21,27 +22,8 @@ a:hover{
     color: rgb(219, 217, 214);
 }
 
-#title{
-    font-size: 4rem;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 2vw; 
-    font-weight: normal;
-    line-height: 1.2;    
-    margin-top: 1em;    
-    margin-bottom: 0.5em;
-    color: #333;
-}
-
-#image-home{
-    text-align: center;
-}
-
-#home {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 2vw;
-}
-
 .social-network{
+    padding-bottom: 2%;
     text-align: center;
 }
 
@@ -55,4 +37,316 @@ a:hover{
 img:hover {
     filter: none;
     -webkit-filter: grayscale(0);
+}
+
+/* Estilos Home */
+#home {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 3vw;
+}
+
+#title{
+    word-spacing: 1 0px;
+    font-size: 4rem;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0vw; 
+    font-weight: normal;
+    line-height: 1.2;    
+    margin-top: 0.6em;
+    color: #333;
+}
+
+#subtitle{
+    margin-top: 0;
+    font-size: 1.8rem;
+    font-family: 'My Soul', cursive;
+    color: #333;
+}
+
+#image-home{
+    height: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+/* Estilos Contato */
+#contact-title {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 70px;
+    position: relative;
+}
+
+h1 {
+    color: #333;
+    font-size: 2.2rem;
+    letter-spacing: 6px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+form {
+    margin-right: 25%;
+    margin-left: 25%;
+}
+  
+input[type='text'], [type='email'], textarea {
+    background: none;
+    border: none;
+    border-bottom: solid 1px #333;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    font-size: 1.000em;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 0em 0 1.875em 0;
+    padding: 0 0 0.875em 0;
+    width: 100%;
+
+}
+  
+input[type='text']:focus, [type='email']:focus, textarea:focus {
+   outline: none;
+}
+
+.email {
+    float: right;
+    width: 45%;
+}  
+  
+.message {
+    float: none;
+}
+  
+.name {
+    float: left;
+    width: 45%;
+}
+
+.subject {
+    width: 100%;
+}
+  
+textarea {
+    line-height: 150%;
+    height: 150px;
+    resize: none;
+    width: 100%;
+}
+
+#form_button {
+    background: none;
+    border: solid 2px rgb(77, 76, 76);
+    color: rgb(77, 76, 76);
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-size: 0.875em;
+    font-weight: bold;
+    outline: none;
+    padding: 20px 35px;
+    text-transform: uppercase;
+}
+  
+#form_button:hover {
+    background: rgb(77, 76, 76);
+    color: #F2F3EB;
+}
+
+#contact-email{
+    margin-top: 50px;
+    margin-bottom: 215px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:1.1em;
+    text-align: center;
+    color: rgb(44, 43, 43);
+}
+
+#mail{
+    color: rgb(102, 99, 99);
+}
+
+#mail:hover{
+    color: #aaa4a4;
+}
+
+/* Estilos About*/
+#about {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    padding-top: 5%;
+    padding-left: 2.8em;
+    padding-right: 2.8em;
+    padding-bottom: 15%;
+    grid-template-columns: 300px 1fr;
+    gap: 2.0rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: justify;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:1em;
+    color: #333;
+}
+
+#about img {
+    padding: 20px;
+    max-width: 90%;
+    height: auto;
+}
+
+ /* Estilos portfolio */
+.column {
+    position:relative;
+    float: left;
+    height: auto;
+    width: 33%;
+    padding-top: 4%;
+    padding-bottom: 5% ;
+
+}
+
+.portfolio::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+ 
+.portfolio img {
+    height: auto;
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+}
+
+.portfolio img:hover {
+    filter: none;
+    -webkit-filter: grayscale(0);
+}
+
+.portfolio{
+    color: #918c8c;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:2em;
+}
+
+.portfolio:hover{
+    cursor: pointer;
+}
+
+.text0 {
+    position: absolute;
+    top: 30%;
+    left: 13%;
+}
+
+.text1 {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.text2 {
+    position: absolute;
+    top: 30%;
+    right: 8%;
+}
+
+/* Estilos 7 Dwarfs Gem Shop */
+#sevendwarfs {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    padding: 2.8rem;
+    grid-template-columns: 300px 1fr;
+    gap: 2.0rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: justify;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:1em;
+    color: #333;
+}
+
+#sevendwarfs img{
+    border: 1px solid rgb(214, 211, 211);
+    padding: 20px;
+    max-width: 100%;
+    height: 80%;
+}
+
+#sevendwarfs p{
+    margin-top: 30%;
+}
+
+#sevendwarfs ul{
+    margin-left: 20%;
+    margin-top: 30%;
+}
+
+/* Estilos 7 Dwarfs Gem Shop */
+#forever4 {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    padding: 2.8rem;
+    grid-template-columns: 300px 1fr;
+    gap: 2.0rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: justify;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:1em;
+    color: #333;
+}
+
+#forever4 img{
+    border: 1px solid rgb(214, 211, 211);
+    padding: 20px;
+    max-width: 100%;
+    height: 80%;
+}
+
+#forever4 p{
+    margin-top: 50%;
+}
+
+#forever4 ul{
+    margin-left: 20%;
+    margin-top: 10%;
+}
+
+/* Estilos Blackjack */
+#blackjack {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    padding-top: 7rem;
+    padding-left: 2.8rem;
+    padding-left: 2.8rem;
+    padding-bottom: 8rem;
+    grid-template-columns: 300px 1fr;
+    gap: 5.0rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: justify;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:1em;
+    color: #333;
+}
+
+#blackjack img{
+    border: 1px solid rgb(214, 211, 211);
+    padding: 20px;
+    max-width: 100%;
+    height: 80%;
+}
+
+#blackjack p{
+    margin-top: 30%;
+}
+
+#blackjack ul{
+    margin-left: 20%;
+    margin-top: 0;
 }
