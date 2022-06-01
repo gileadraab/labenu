@@ -50,10 +50,43 @@ footer{
     background-color: rgba(141, 61, 130, 0.945);
     align-items: center;
     text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .video{
     display: grid;
     justify-content: center;
-    align-items: center;
+    align-content: center;
+}
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px){
+    header{
+        flex-wrap: wrap;
+        justify-items: center;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        padding-left: 0;
+    }
+
+    main{
+        display: flex;
+        Flex-direction: column;
+        justify-items: center;
+        margin: 3vh 3vw 3vh 3vw;
+
+    }
+
+    .video{
+        display: flex;
+        width: 90vw;
+        Flex-direction: column;
+        margin: 3vh 3vw 3vh 3vw;
+    }
+
+    .container{
+        display: block;        
+    }
+
 }
