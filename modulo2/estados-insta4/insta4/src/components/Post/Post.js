@@ -44,12 +44,6 @@ const PostPhoto = styled.img`
   width: 100%;
 `
 
-const SmallerSave = styled.img`
-  width: 24px; 
-  height: 24px; 
-  viewBox: 0px 0px 24px 24px;
-`
-
 
 class Post extends React.Component {
   state = {
