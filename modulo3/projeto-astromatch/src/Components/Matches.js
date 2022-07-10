@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import React from 'react'
+import { MatchesContainer } from "./Styles";
+import LikeImage from "./Img/like.png"
+import { ProfileContainer, ProfilesPage, ProfileImage, Like } from "./Styles";
 
 export default function Matches(props) {
   const [matches, setMatches] = useState([])
@@ -18,15 +21,14 @@ export default function Matches(props) {
 
   console.log(matches)
   const showMatches = matches.map(match => {
-    return <div><img src= {match.photo}height='50px' width='50px'/>{match.name}</div>
+    return <ProfileContainer><ProfileImage src= {match.photo}height='70vh' width='70vw'/>{match.name}</ProfileContainer>
   })
 
 
   return (
-    <div>
-      <button onClick={() => props.changeScreen("profiles")}>Ir para Profiles</button>
-      <div>Matches</div>
+    <MatchesContainer>
+      <ProfilesPage> <Like src={LikeImage} onClick={() => props.changeScreen("profiles")}></Like></ProfilesPage>
       {showMatches}
-    </div>
+    </MatchesContainer>
   )
 }

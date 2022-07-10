@@ -3,6 +3,8 @@ import './App.css';
 import Matches from './Components/Matches';
 import { useEffect, useState } from "react";
 import Profiles from './Components/Profiles';
+import {Body, MainContainer, Header, Logo, Name, LogoFooter, Footer} from './Components/Styles'
+import SwanLogo from './Components/Img/WhiteSwans.png'
 
 function App() {
   const [screen, setScreen] = useState("profiles")
@@ -23,10 +25,13 @@ function App() {
 
 
   return (
-    <div>
-      <h2>ASTROMATCH</h2>
+    <Body>
+      <MainContainer>
+        <Header><Logo src = {SwanLogo}></Logo><Name>LabeLove</Name></Header>
         {showScreen()}
-    </div>
+        <Footer></Footer>
+      </MainContainer>
+    </Body>
   );
 }
 

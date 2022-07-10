@@ -1,6 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { MatchesContainer, PhotoContainer, ProfilePhoto, Bio, ProfileName, Age, ActionsContainer, Dislike, Chat, Like } from "./Styles";
+import ChatImage from "./Img/chat.png"
+import DislikeImage from "./Img/dislike.png"
+import LikeImage from "./Img/like.png"
 import React from 'react'
+import Reset from "./Reset";
 
 export default function Profiles(props) {
   const [profile, setProfile] = useState({})
@@ -18,17 +23,16 @@ export default function Profiles(props) {
     .catch((err) => alert(err.response))
   })
 
-  //Check for the   between the user
-  const choosePerson = ((choice) => {
+  const choosePerson = ((userChoice) => {
     const match = {
-      id:profile.id,
-      choice: choice 
+      id: profile.id,
+      choice: userChoice 
     }
     axios
     .post("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/gileadraab/choose-person", match)
     .then ((response) => {
       console.log(response)
-      response.data.isMatch  === true && alert("IT'S A MATCH")
+      response.data.isMatch  === true && alert("IT'S A MATCH!")
       getProfile()
     })
     .catch((err) => alert(err.response))
@@ -42,17 +46,21 @@ export default function Profiles(props) {
   })
 
   return (
-    <div>
-      <button onClick={() => props.changeScreen("matches")}>Ir para Matches</button>
-      <div>Profiles</div>
-      <img src={profile.photo} height='200px' ></img>
-      <p>Name: {profile.name}, {profile.age}</p> 
-      <p>Bio: {profile.bio}</p>
-      <button onClick={() => getProfile(false)}>DISLIKE</button>
-      <button onClick={() => choosePerson(true)}>LIKE</button>
-      <div><button onClick={() => resetProfiles()}>RESETAR PERFIS</button></div>
+    profile ?
+    <MatchesContainer>
+      <PhotoContainer><ProfilePhoto src={profile.photo} height='200px' ></ProfilePhoto></PhotoContainer>
+      <Bio>
+        <ProfileName>{profile.name}, <Age>{profile.age}</Age></ProfileName> 
+        <p>{profile.bio}</p>
 
+        <ActionsContainer>
+          <Dislike src={DislikeImage} onClick={() => getProfile(false)}></Dislike>
+          <Chat src={ChatImage} onClick={() => props.changeScreen("matches")}></Chat>
+          <Like src={LikeImage} onClick={() => choosePerson(true)}></Like>
+        </ActionsContainer>
+      </Bio>
 
-    </div>
+    </MatchesContainer> : 
+    <Reset resetProfiles = {resetProfiles}/>
   )
 }
