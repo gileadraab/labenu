@@ -27,8 +27,6 @@ export const LoginPage = () => {
   }
 
   const login = () => {
-    console.log(email)
-    console.log(password)
     const body = {
       email: email,
       password: password
