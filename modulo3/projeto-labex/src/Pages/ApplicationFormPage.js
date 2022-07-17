@@ -2,6 +2,10 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
+import { useMemo } from 'react'
+import countryList from 'react-select-country-list'
+import { useNavigate } from 'react-router'
+import { goBack } from '../Routes/Coordinator'
 
 export const ApplicationFormPage = () => {
   const [trips, setTrips] = useState([])
@@ -10,7 +14,9 @@ export const ApplicationFormPage = () => {
   const [age, setAge] = useState(0)
   const [applicationText, setApplicationText] = useState("")
   const [profession, setProfession] = useState("")
+  const [country, setCountry] = useState("")
 
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios
@@ -23,7 +29,7 @@ export const ApplicationFormPage = () => {
     })
   }, [])
 
-  const onChangeTrip = (event) => {
+  const onChangeTripId = (event) => {
     setTripId(event.target.value)
   }
 
@@ -43,7 +49,9 @@ export const ApplicationFormPage = () => {
     setApplicationText(event.target.value)
   }
 
-  console.log(tripId)
+  const onChangeCountry = (event) => {
+    setCountry(event.target.value)
+  }
 
   const applyToTrip = () => {
     const body = {
@@ -54,20 +62,38 @@ export const ApplicationFormPage = () => {
       country: country
     }
 
+    const id = tripId
 
+    axios
+    .post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/gileadraab/trips/${id}/apply`, body)
+    .then ((response) => {
+      alert("Aplicação enviada com sucesso!")
+      setName("")
+      setAge(0)
+      setApplicationText("")
+      setProfession("")
+      setCountry("")
+    })
+    .catch ((err) => {
+      alert(err.response)
+    })
   }
 
   const tripSelection = trips.map(trip => {
     return <option key={trip.id} value={trip.id}>
-    {trip.name}     
-  </option>
+      {trip.name}     
+    </option>
+  })
 
+  const countryOptions = useMemo(() => countryList().getData(), [])
+  
+  const countrySelection = countryOptions.map(country => {
+    return <option key={country.value} value={country.label}>
+      {country.label}     
+    </option>
   })
 
   return (
-
-
-
     <div>
       <h2>Inscreva-se para uma viagem</h2>
 
@@ -75,7 +101,8 @@ export const ApplicationFormPage = () => {
         <select
           name="choseTrip"
           id="trip-select"
-          onChange={onChangeTrip}>
+          onChange={onChangeTripId}>
+          <option>Escolha seu destino</option>
           {tripSelection}
         </select>
       </p>
@@ -102,13 +129,17 @@ export const ApplicationFormPage = () => {
         onChange={onChangeProfession}/>
       </p>
       <p>
-        <select>
-          <option>Escolha um País</option>
+        <select
+          name="choseCountry"
+          id="country-select"
+          onChange={onChangeCountry}>
+          <option>País</option>
+          {countrySelection}
         </select>
       </p>
 
       <p>
-        <button>Voltar</button><button>Enviar</button>
+        <button onClick={()=> goBack(navigate)}>Voltar</button><button onClick={applyToTrip}>Enviar</button>
       </p>
     </div>
   )

@@ -1,35 +1,124 @@
 import React from 'react'
 import { useProtectedPage } from '../Hooks/useProtectedPage'
+import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { goBack } from '../Routes/Coordinator'
 
 export const CreateTripPage = () => {
+  const allPlanets = [
+    {name: "Mercúrio"}, 
+    {name:"Vênus"}, 
+    {name: "Terra"}, 
+    {name: "Marte"}, 
+    {name: "Júpiter"}, 
+    {name: "Saturno"}, 
+    {name: "Urano"}, 
+    {name: "Netuno"}
+  ]
+  
+  const [name, setName] = useState("")
+  const [planet, setPlanet] = useState("")
+  const [date, setDate] = useState("")
+  const [description, setDescription] = useState("")
+  const [duration, setDuration] = useState(0)
+
+  const token = localStorage.getItem("token")
 
   useProtectedPage()
+
+  const navigate = useNavigate()
+
+  const onChangeName = (event) => {
+    setName(event.target.value)
+  }
+
+  const onChangePlanet = (event) => {
+    setPlanet(event.target.value)
+  }
+
+  const onChangeDate = (event) => {
+    setDate(event.target.value)
+  }
+
+  const onChangeDescription = (event) => {
+    setDescription(event.target.value)
+  }
+
+  const onChangeDuration = (event) => {
+    setDuration(event.target.value)
+  }
+
+  const PlanetSelection = allPlanets.map(planet => {
+    return <option value={planet.name}>
+      {planet.name}     
+    </option>
+  })
+
+  const createTrip = () => {
+    const body = {
+      name: name,
+      planet: planet,
+      date: date,
+      description: description,
+      durationInDays: duration
+    }
+
+    axios
+    .post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/gileadraab/trips`, body, {
+      headers: {
+        auth: token
+      }
+    })
+
+    .then ((response) => {
+      alert("Viagen criada com sucesso!")
+    })
+    .catch ((err) => {
+      alert("Não foi possível criar essa viagem, verifique os dados inseridos")
+    })
+  }
 
   return (
     <div>
       <h2>Criar Viagem</h2>
 
       <p>      
-        <input placeholder="Nome"/>
+        <input 
+          placeholder="Nome da Viagem"
+          value = {name}
+          onChange={onChangeName}/>
       </p>
       <p>
-        <select>
+        <select
+          onChange={onChangePlanet}>
           <option>Escolha um Planeta</option>
+          {PlanetSelection}
         </select>
       </p>
       <p>
-        <input placeholder="Escolha uma data" type="date" value=""/>
+        <input 
+          placeholder="Escolha uma data" 
+          type="date" 
+          value={date}
+          onChange={onChangeDate}/>
       </p>
       <p>
-        <input placeholder="Descrição"/>
+        <input 
+          placeholder="Descrição"
+          value={description}
+          onChange={onChangeDescription}/>
       </p>
       <p>
-        <input placeholder="Duração em dias"/>
+        <input 
+          placeholder="Duração em dias"
+          value={duration}
+          onChange={onChangeDuration}/>
       </p>
 
 
       <p>
-        <button>Voltar</button><button>Criar</button>
+        <button onClick={()=>goBack(navigate)}>Voltar</button><button onClick={createTrip}>Criar</button>
       </p>
     </div>
   )

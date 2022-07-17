@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from 'axios'
+import { goBack, goToApplicationForm } from '../Routes/Coordinator'
 
 export const ListTripsPage = () => {
   const [trips, setTrips] = useState([])
+  
 
   useEffect(() => {
     axios
@@ -20,13 +22,6 @@ export const ListTripsPage = () => {
 
   const navigate = useNavigate()
 
-  const goBack = () => {
-    navigate(-1)
-  }
-
-  const goToApplicationForm = () => {
-    navigate("/application")
-  }
 
   const listTrips = trips.map(trip => {
     return <div>
@@ -41,8 +36,8 @@ export const ListTripsPage = () => {
 
   return (
     <div>
-      <button onClick={goBack}>Voltar</button>
-      <button onClick={goToApplicationForm}>Inscrever-se</button>
+      <button onClick={() => goBack(navigate)}>Voltar</button>
+      <button onClick={() => goToApplicationForm(navigate)}>Inscrever-se</button>
       <p>Lista de Viagens</p>
       {listTrips}
     </div>

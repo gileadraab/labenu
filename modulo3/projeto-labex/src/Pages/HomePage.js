@@ -1,23 +1,16 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { goToLogin, goToTrips } from '../Routes/Coordinator'
 
 export const HomePage = () => {
   const navigate = useNavigate()
-
-  const goToTrips = () => {
-    navigate("/trips/list")
-  }
-
-  const goToLogin = () => {
-    navigate("/login")
-  }
 
 
   return (
     <div>
       <p>LabeX</p>
-      <button onClick={goToTrips}>Ver Viagens</button>
-      <button onClick={goToLogin}>Área de Admin</button>
+      <button onClick={()=> goToTrips(navigate)}>Ver Viagens</button>
+      <button onClick={()=> goToLogin(navigate)}>Área de Admin</button>
 
 
     </div>
