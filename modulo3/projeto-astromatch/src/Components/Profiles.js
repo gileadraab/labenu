@@ -40,6 +40,7 @@ export default function Profiles(props) {
   })
 
   //Reset profiles
+
   const resetProfiles = (() => {
     axios
     .put("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/gileadraab/clear")

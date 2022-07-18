@@ -197,4 +197,8 @@ export const Footer = styled.div`
   }
 `
 
+export const LogoFooter = styled.img`
+  height: 4vh;
+  background-color: #289c95;
+
 
