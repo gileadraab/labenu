@@ -3,6 +3,7 @@ import axios from 'axios'
 import { goBack } from '../Routes/Coordinator'
 import { useProtectedPage } from '../Hooks/useProtectedPage'
 import { useParams, useNavigate } from 'react-router-dom'
+import { BodyTripsDetails, Button, HomeButtonsContainer, TitleTripList, TripContainer } from '../Components/Styled'
 
 export const TripDetailsPage = () => {
   const [tripDetails, setTripDetails] = useState({})
@@ -17,6 +18,11 @@ export const TripDetailsPage = () => {
   const params = useParams()
 
   useEffect(() => {
+    getTripDetails()
+
+  }, [])
+
+  const getTripDetails = () => {
     const id = params.id
 
     axios
@@ -33,8 +39,7 @@ export const TripDetailsPage = () => {
     .catch((err) => {
       alert("Não foi possivel localizar esta viagem")
     })
-
-  }, [tripCandidates])
+  }
 
   const decideCandidate = (choice, candidate) => {
     const tripId = params.id
@@ -51,51 +56,59 @@ export const TripDetailsPage = () => {
       }
     })
     .then((response) => {
+      getTripDetails()
       alert(response.data.message)
+ 
     })
     .catch((err) => {
+      getTripDetails()
       alert(err.response)
     })
   }
 
   const pendingCandidates = tripCandidates.map(candidate =>{
-    return <div>
-      <p>Nome: {candidate.name}</p>      
-      <p>Idade: {candidate.age}</p>   
-      <p>Profissão: {candidate.profession}</p>      
-      <p>País: {candidate.country}</p>
-      <p>Texto de Candidatura: {candidate.applicationText}</p> 
-      <p><button onClick={()=>decideCandidate(false, candidate.id)}>Reprovar</button><button onClick={()=>decideCandidate(true, candidate.id)}>Aprovar</button></p>     
-    </div>
+    return <TripContainer>
+        <p>Nome: {candidate.name}</p>      
+        <p>Idade: {candidate.age}</p>   
+        <p>Profissão: {candidate.profession}</p>      
+        <p>País: {candidate.country}</p>
+        <p>Texto de Candidatura: {candidate.applicationText}</p> 
+        <HomeButtonsContainer><Button onClick={()=>decideCandidate(false, candidate.id)}>Reprovar</Button><Button onClick={()=>decideCandidate(true, candidate.id)}>Aprovar</Button></HomeButtonsContainer>     
+      </TripContainer>
   })
 
   const approvedCandidates = approvedCandidatesArray.map(candidate =>{
-    return <div>
-    <p>- {candidate.name}</p> 
-    </div>   
+    return <p><h3>- {candidate.name.toUpperCase()}</h3></p>  
   })
 
   return (
-    <div>
-      <h2>Detalhes da Viagem</h2>
-      <p>Nome: {tripDetails.name}</p>
-      <p>Descrição: {tripDetails.description}</p>
-      <p>Planeta: {tripDetails.planet}</p>
-      <p>Duração: {tripDetails.durationInDays}</p>
-      <p>Data: {tripDetails.date}</p>
+    <BodyTripsDetails>
+        <TitleTripList>Detalhes da Viagem</TitleTripList>
+        <TripContainer>
+          <p><h2>{tripDetails.name}</h2></p>
+          <p>Descrição: {tripDetails.description}</p>
+          <p>Planeta: {tripDetails.planet}</p>
+          <p>Duração: {tripDetails.durationInDays} Dias</p>
+          <p>Data: {tripDetails.date}</p>
+        </TripContainer>
+
+        <TitleTripList>Candidatos Pendentes</TitleTripList>
+
+          {pendingCandidates} 
 
 
-      <h2>Candidatos Pendentes</h2>
-      {pendingCandidates} 
-      
-      <h2>Candidatos Aprovados</h2>
-      {approvedCandidates}
+        <TitleTripList>Candidatos Aprovados</TitleTripList>
+
+        <TripContainer>
+          {approvedCandidates}
+        </TripContainer>
 
 
-      <p><button onClick={()=>goBack(navigate)}>Voltar</button></p>
-      
-      
-    </div>
+
+        <p><Button onClick={()=>goBack(navigate)}>Voltar</Button></p>
+        
+        
+    </BodyTripsDetails>
   )
 }
 

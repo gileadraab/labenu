@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { goToHomePage } from '../Routes/Coordinator'
+import { Body, Button, Field, FormContainer, HomeButtonsContainer, Input, MainContainerLogin, TitleApplication } from '../Components/Styled'
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("")  
@@ -48,25 +49,28 @@ export const LoginPage = () => {
     })
   }
   return (
-    <div>
-      <h2>Login</h2>
-      <p>
-        <input 
-          placeholder="E-mail"
-          type="email"
-          value={email}
-          onChange={onChangeEmail}/>
+    <Body>
+      <MainContainerLogin>
+        <FormContainer>
+        <TitleApplication>Login</TitleApplication>
+        <Field>
+          <Input 
+            placeholder="E-mail"
+            type="email"
+            value={email}
+            onChange={onChangeEmail}/>
 
-      </p>
-      <p>
-        <input placeholder="Senha"
-          type="password"
-          value={password}
-          onChange={onChangePassword}/>
-      </p>
-      <p><button onClick={() => goToHomePage(navigate)}>Voltar</button><button onClick={login}>Entrar</button></p>
-
-    </div>
+        </Field>
+        <Field>
+          <Input placeholder="Senha"
+            type="password"
+            value={password}
+            onChange={onChangePassword}/>
+        </Field>
+        <HomeButtonsContainer><Button onClick={() => goToHomePage(navigate)}>Voltar</Button><Button onClick={login}>Entrar</Button></HomeButtonsContainer>
+        </FormContainer>
+      </MainContainerLogin>
+    </Body>
   )
 }
 

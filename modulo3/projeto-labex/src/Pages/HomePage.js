@@ -1,19 +1,22 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { goToLogin, goToTrips } from '../Routes/Coordinator'
+import { Body, Title, HomeContainer, HomeButtonsContainer, Button } from '../Components/Styled'
 
 export const HomePage = () => {
   const navigate = useNavigate()
 
 
   return (
-    <div>
-      <p>LabeX</p>
-      <button onClick={()=> goToTrips(navigate)}>Ver Viagens</button>
-      <button onClick={()=> goToLogin(navigate)}>Área de Admin</button>
-
-
-    </div>
+    <Body>
+      <HomeContainer>
+        <Title>LABEX</Title>
+        <HomeButtonsContainer>
+          <Button onClick={()=> goToTrips(navigate)}>VER VIAGENS</Button>
+          <Button onClick={()=> goToLogin(navigate)}>ÁREA DE ADMIN</Button>
+        </HomeButtonsContainer>
+      </HomeContainer>
+    </Body>
   )
 }
 

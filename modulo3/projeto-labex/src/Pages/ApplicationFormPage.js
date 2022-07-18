@@ -6,12 +6,13 @@ import { useMemo } from 'react'
 import countryList from 'react-select-country-list'
 import { useNavigate } from 'react-router'
 import { goBack } from '../Routes/Coordinator'
+import { Body, MainContainer, FormContainer, Field, TitleApplication, InputSelection, Input, InputApplication, ButtonApplication } from "../Components/Styled"
 
 export const ApplicationFormPage = () => {
   const [trips, setTrips] = useState([])
   const [tripId, setTripId] = useState ("")
   const [name, setName] = useState("")
-  const [age, setAge] = useState(0)
+  const [age, setAge] = useState("")
   const [applicationText, setApplicationText] = useState("")
   const [profession, setProfession] = useState("")
   const [country, setCountry] = useState("")
@@ -64,19 +65,25 @@ export const ApplicationFormPage = () => {
 
     const id = tripId
 
-    axios
-    .post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/gileadraab/trips/${id}/apply`, body)
-    .then ((response) => {
-      alert("Aplicação enviada com sucesso!")
-      setName("")
-      setAge(0)
-      setApplicationText("")
-      setProfession("")
-      setCountry("")
-    })
-    .catch ((err) => {
-      alert(err.response)
-    })
+    if (isNaN(age)){
+      alert("O valor de 'idade' deve ser um número")
+
+    } else {
+
+      axios
+      .post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/gileadraab/trips/${id}/apply`, body)
+      .then ((response) => {
+        alert("Aplicação enviada com sucesso!")
+        setName("")
+        setAge("")
+        setApplicationText("")
+        setProfession("")
+        setCountry("")
+      })
+      .catch ((err) => {
+        alert("Não foi possível completar sua inscrição, verifique os dados inseridos")
+      })
+    }
   }
 
   const tripSelection = trips.map(trip => {
@@ -94,53 +101,55 @@ export const ApplicationFormPage = () => {
   })
 
   return (
-    <div>
-      <h2>Inscreva-se para uma viagem</h2>
+    <Body>
+      <MainContainer>
+        <FormContainer>
+          <TitleApplication>INSCREVA-SE</TitleApplication>
 
-      <p>      
-        <select
-          name="choseTrip"
-          id="trip-select"
-          onChange={onChangeTripId}>
-          <option>Escolha seu destino</option>
-          {tripSelection}
-        </select>
-      </p>
-      <p>      
-        <input 
-        placeholder="Nome"
-        value = {name}
-        onChange={onChangeName}/>
-      </p>
-      <p>
-        <input 
-        placeholder="Idade"
-        value = {age}
-        onChange={onChangeAge}/>
-      </p>
-      <p>
-        <input placeholder="Texto de Candidatura"
-        value = {applicationText}
-        onChange={onChangeApplicationText}/>
-      </p>
-      <p>
-        <input placeholder="Profissão"
-        value = {profession}
-        onChange={onChangeProfession}/>
-      </p>
-      <p>
-        <select
-          name="choseCountry"
-          id="country-select"
-          onChange={onChangeCountry}>
-          <option>País</option>
-          {countrySelection}
-        </select>
-      </p>
-
-      <p>
-        <button onClick={()=> goBack(navigate)}>Voltar</button><button onClick={applyToTrip}>Enviar</button>
-      </p>
-    </div>
+          <Field>      
+            <InputSelection
+              name="choseTrip"
+              id="trip-select"
+              onChange={onChangeTripId}>
+              <option>Escolha seu destino</option>
+              {tripSelection}
+            </InputSelection>
+          </Field>
+          <Field>      
+            <Input 
+            placeholder="Nome"
+            value = {name}
+            onChange={onChangeName}/>
+          </Field>
+          <Field>
+            <Input 
+            placeholder="Idade"
+            value = {age}
+            onChange={onChangeAge}/>
+          </Field>
+          <Field>
+            <InputApplication placeholder="Texto de Candidatura"
+            value = {applicationText}
+            onChange={onChangeApplicationText}/>
+          </Field>
+          <Field>
+            <Input placeholder="Profissão"
+            value = {profession}
+            onChange={onChangeProfession}/>
+          </Field>
+          <Field>
+            <InputSelection
+              name="choseCountry"
+              id="country-select"
+              onChange={onChangeCountry}>
+              <option>País</option>
+              {countrySelection}
+            </InputSelection>
+          </Field>
+          <ButtonApplication onClick={applyToTrip}>Enviar</ButtonApplication>
+          <ButtonApplication onClick={()=> goBack(navigate)}>Voltar</ButtonApplication>
+        </FormContainer>
+      </MainContainer>
+    </Body>
   )
 }

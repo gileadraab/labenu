@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { goBack, goToApplicationForm } from '../Routes/Coordinator'
+import { Body, TripListContainer, TripContainer, Button, TripButtonsContainer, TitleTripList } from '../Components/Styled'
+
 
 export const ListTripsPage = () => {
   const [trips, setTrips] = useState([])
@@ -24,22 +26,27 @@ export const ListTripsPage = () => {
 
 
   const listTrips = trips.map(trip => {
-    return <div>
-      <p>Nome: {trip.name}</p>      
-      <p>Descrição: {trip.description}</p>      
-      <p>Planeta: {trip.planet}</p>      
-      <p>Duração: {trip.durationInDays}</p>     
-      <p>Data: {trip.date}</p>
-    </div>
+    return <TripContainer>
+      <p><b>Nome:</b> {trip.name}</p>      
+      <p><b>Descrição:</b> {trip.description}</p>      
+      <p><b>Planeta:</b> {trip.planet}</p>      
+      <p><b>Duração:</b> {trip.durationInDays}</p>     
+      <p><b>Data:</b> {trip.date}</p>
+    </TripContainer>
   })
 
 
   return (
-    <div>
-      <button onClick={() => goBack(navigate)}>Voltar</button>
-      <button onClick={() => goToApplicationForm(navigate)}>Inscrever-se</button>
-      <p>Lista de Viagens</p>
+    <Body>
+
+      <TripButtonsContainer>
+        <Button onClick={() => goBack(navigate)}>VOLTAR</Button>
+        <Button onClick={() => goToApplicationForm(navigate)}>INSCREVER-SE</Button>
+      </TripButtonsContainer>
+
+      <TitleTripList>Lista de Viagens</TitleTripList>
+
       {listTrips}
-    </div>
+    </Body>
   )
 }

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { goBack } from '../Routes/Coordinator'
+import { Body, ButtonApplication, Field, FormContainer, Input, InputApplication, InputSelection, MainContainer, TitleApplication } from '../Components/Styled'
 
 export const CreateTripPage = () => {
   const allPlanets = [
@@ -21,7 +22,7 @@ export const CreateTripPage = () => {
   const [planet, setPlanet] = useState("")
   const [date, setDate] = useState("")
   const [description, setDescription] = useState("")
-  const [duration, setDuration] = useState(0)
+  const [duration, setDuration] = useState("")
 
   const token = localStorage.getItem("token")
 
@@ -64,63 +65,78 @@ export const CreateTripPage = () => {
       durationInDays: duration
     }
 
-    axios
-    .post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/gileadraab/trips`, body, {
-      headers: {
-        auth: token
-      }
-    })
+    if(isNaN(duration)){
 
-    .then ((response) => {
-      alert("Viagen criada com sucesso!")
-    })
-    .catch ((err) => {
-      alert("Não foi possível criar essa viagem, verifique os dados inseridos")
-    })
+      alert("O tempo de duração deve ser um número")
+
+    } else {
+
+      axios
+      .post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/gileadraab/trips`, body, {
+        headers: {
+          auth: token
+        }
+      })
+
+      .then ((response) => {
+        alert("Viagen criada com sucesso!")
+        setName("")
+        setPlanet("")
+        setDate("")
+        setDescription("")
+        setDuration("")
+      })
+      .catch ((err) => {
+        alert("Não foi possível criar essa viagem, verifique os dados inseridos")
+      })
+    }
   }
 
   return (
-    <div>
-      <h2>Criar Viagem</h2>
+    <Body>
+      <MainContainer>
+        <FormContainer>
+          <TitleApplication>Criar Viagem</TitleApplication>
 
-      <p>      
-        <input 
-          placeholder="Nome da Viagem"
-          value = {name}
-          onChange={onChangeName}/>
-      </p>
-      <p>
-        <select
-          onChange={onChangePlanet}>
-          <option>Escolha um Planeta</option>
-          {PlanetSelection}
-        </select>
-      </p>
-      <p>
-        <input 
-          placeholder="Escolha uma data" 
-          type="date" 
-          value={date}
-          onChange={onChangeDate}/>
-      </p>
-      <p>
-        <input 
-          placeholder="Descrição"
-          value={description}
-          onChange={onChangeDescription}/>
-      </p>
-      <p>
-        <input 
-          placeholder="Duração em dias"
-          value={duration}
-          onChange={onChangeDuration}/>
-      </p>
+          <Field>      
+            <Input 
+              placeholder="Nome da Viagem"
+              value = {name}
+              onChange={onChangeName}/>
+          </Field>
+          <Field>
+            <InputSelection
+              onChange={onChangePlanet}>
+              <option>Escolha um Planeta</option>
+              {PlanetSelection}
+            </InputSelection>
+          </Field>
+          <Field>
+            <Input
+              placeholder="Escolha uma data" 
+              type="date" 
+              value={date}
+              onChange={onChangeDate}/>
+          </Field>
+          <Field>
+            <InputApplication
+              placeholder="Descrição"
+              value={description}
+              onChange={onChangeDescription}/>
+          </Field>
+          <Field>
+            <Input 
+              placeholder="Duração em dias"
+              value={duration}
+              onChange={onChangeDuration}/>
+          </Field>
 
+          <ButtonApplication onClick={createTrip}>Criar</ButtonApplication>
+          <ButtonApplication onClick={()=>goBack(navigate)}>Voltar</ButtonApplication>
 
-      <p>
-        <button onClick={()=>goBack(navigate)}>Voltar</button><button onClick={createTrip}>Criar</button>
-      </p>
-    </div>
+        </FormContainer>
+      </MainContainer>
+    </Body>
   )
 }
 

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useProtectedPage } from '../Hooks/useProtectedPage'
 import {goToHomePage, goToTripDetails, goToCreateTrip, goToLogin } from '../Routes/Coordinator'
 import { useParams } from 'react-router-dom'
+import { Body, Button, HomeButtonsContainer, AdminPageContainer, TitleTripList, AdminTripContainer } from '../Components/Styled'
 
 export const AdminHomePage = () => {
   const [trips, setTrips] = useState([])
@@ -19,6 +20,11 @@ export const AdminHomePage = () => {
 
 
   useEffect(() => {
+    getTripDetails()
+
+  }, [])
+
+  const getTripDetails = () => {
     axios
     .get ("https://us-central1-labenu-apis.cloudfunctions.net/labeX/gileadraab/trips")
     .then((response) => {
@@ -27,8 +33,7 @@ export const AdminHomePage = () => {
     .catch((err) => {
       alert(err.response)
     })
-
-  }, [trips])
+  }
 
   const deleteTrip = (tripID) => {
     const id = tripID
@@ -40,6 +45,7 @@ export const AdminHomePage = () => {
       }
     })
     .then((response) => {
+      getTripDetails()
       alert("Viagem deletada com sucesso")
     })
     .catch((err) => {
@@ -54,21 +60,21 @@ export const AdminHomePage = () => {
     
 
     const listTrips = trips.map(trip => {
-    return <div>
-      <p onClick={()=> goToTripDetails(navigate, trip.id)}>{trip.name}</p><button onClick={()=>deleteTrip(trip.id)}>Deletar viagem</button>
-    </div>
+    return <AdminTripContainer> <span onClick={()=> goToTripDetails(navigate, trip.id)}><b>{trip.name.toUpperCase()}</b></span><Button onClick={()=>deleteTrip(trip.id)}>Deletar viagem</Button></AdminTripContainer>
+
   })
   return (
-    <div>
-      <h2>Painel Administrativo</h2>
-      <p>
-        <button onClick={()=> goToHomePage(navigate)}>Voltar</button><button onClick={()=> goToCreateTrip(navigate)}>Criar Viagem</button><button onClick={()=>logout(navigate)}>Logout</button>
-      </p>
-      {listTrips}
+    <Body>
+      <AdminPageContainer>
+        <TitleTripList>Painel Administrativo</TitleTripList>
+        <HomeButtonsContainer>
+          <Button onClick={()=> goToHomePage(navigate)}>Voltar</Button><Button onClick={()=> goToCreateTrip(navigate)}>Criar Viagem</Button><Button onClick={()=>logout(navigate)}>Logout</Button>
+        </HomeButtonsContainer>
+        {listTrips}
 
+      </AdminPageContainer>
 
-
-    </div>
+    </Body>
   )
 }
 
