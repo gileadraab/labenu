@@ -21,6 +21,7 @@ export const Post = () => {
   const {form, onChange, clearFields} = useForm({body:""})
 
   const [coments, setComents] = useState([])
+  const [postDetail, setPostDetail] = useState({})
 
   const token = localStorage.getItem("token")
   const params = useParams()
@@ -29,14 +30,15 @@ export const Post = () => {
   const navigate = useNavigate()
 
   useProtectedPage()
+    
+  let postDetails = JSON.parse(localStorage.getItem("post"))
 
-  let PostDetails = JSON.parse(localStorage.getItem("post"))
-
-
-  useEffect(() => {   
+  useEffect(() => { 
+      postDetails && postDetails.id == id ? setPostDetail(postDetails) :
       posts.filter((post) => {
         if(post.id==id){
           localStorage.setItem('post', JSON.stringify(post))
+          setPostDetail(post)
         }
     })
 
@@ -164,10 +166,10 @@ export const Post = () => {
       <AnswerContainer>
         <PostDetailsTitleContainer>
           <Title>
-            {PostDetails.title}
+            {postDetail.title}
           </Title>
         </PostDetailsTitleContainer>
-        <BodyContainer>{PostDetails.body}</BodyContainer>
+        <BodyContainer>{postDetail.body}</BodyContainer>
         <PostForm onSubmit={postNewComent}>
         <p>
           <InputAnswer 

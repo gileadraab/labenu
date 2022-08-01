@@ -23,4 +23,4 @@ Criar um prototipo de rede social semelhante ao Reddit no qual usuários possam 
 ## Status do projeto
 * Concluído.
 
-##### Link do surge:  https://previous-oven.surge.sh/login
+##### Link do surge:  https://periodic-play.surge.sh/
