@@ -1,0 +1,19 @@
+{
+  "name": "intro-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node ./build/index.js",
+    "exercicio01": "tsc && node ./build/exercicio1.js",
+    "exercicio02": "tsc && node ./build/exercicio2.js",
+    "exercicio03": "tsc && node ./build/exercicio3.js",
+    "exercicio04": "tsc && node ./build/exercicio4.js",
+    "exercicio05": "tsc && node ./build/exercicio5.js"
+  },
+  "author": "Gilead Raab",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.7.1"
+  }
+}
