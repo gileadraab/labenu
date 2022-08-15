@@ -1,0 +1,18 @@
+{
+  "name": "aprofundamento-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "exercicio01": "tsc && node ./build/exercicio01.js",
+    "exercicio02": "tsc && node ./build/exercicio02.js",
+    "exercicio03": "tsc && node ./build/exercicio03.js",
+    "exercicio05": "tsc && node ./build/exercicio05.js",
+    "exercicio06": "tsc && node ./build/exercicio06.js"
+  },
+  "author": "Gilead Raab",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.7.1"
+  }
+}
