@@ -57,18 +57,26 @@ app.get('/users/',(req: Request, res: Response) => {
   try{
     const cpf = req.query.cpf
 
-    accounts.filter((account) => {
-      if (account.cpf == Number(cpf)){
-        res.status(200).send(account)
-        throw new Error("No accounts found for this cpf")
-      }
-    })
-
     if (!accounts.length) {
     res.statusCode = 401
     throw new Error("No accounts found")
     }
     res.status(201).send(accounts)
+
+  } catch (error: any) {
+    res.status(res.statusCode || 500).send({ message: error.message })
+  }
+})
+
+app.get('/users/',(req: Request, res: Response) => {
+  try{
+    const cpf = req.query.cpf
+
+    accounts.filter((account) => {
+      if (account.cpf == Number(cpf)){
+        res.status(200).send(account.balance)
+      }
+    })
 
   } catch (error: any) {
     res.status(res.statusCode || 500).send({ message: error.message })
