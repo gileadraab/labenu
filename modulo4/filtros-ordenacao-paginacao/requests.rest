@@ -1,0 +1,27 @@
+//Return all users
+GET http://localhost:3003/users
+
+###
+
+//Return user by name
+GET http://localhost:3003/users?name=layla
+
+###
+
+//Return users by type
+GET http://localhost:3003/users/cx
+
+###
+
+//Return users by page
+GET http://localhost:3003/users?page=3
+
+###
+
+//Return users by type and name
+GET http://localhost:3003/users/teacher?name=a
+
+###
+
+//Return users by type and page
+GET http://localhost:3003/users/teacher?page=2
