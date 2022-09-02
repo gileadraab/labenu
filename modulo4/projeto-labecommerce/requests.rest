@@ -1,0 +1,8 @@
+POST http://localhost:3003/address
+Content-Type: application/json
+
+{
+  "name": "10",
+  "price": 20,
+  "image_url": "https://i.imgur.com/iZmeCHP.jpg"
+}
