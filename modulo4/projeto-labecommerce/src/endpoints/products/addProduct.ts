@@ -1,6 +1,6 @@
-import { connection } from '../data/connection'
+import { connection } from '../../data/connection'
 import {Request, Response} from 'express'
-import { Product } from '../data/types'
+import { Product } from '../../data/types'
 
 export const addProduct = async (req: Request, res: Response): Promise<void> => {
   try {

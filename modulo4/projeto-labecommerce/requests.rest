@@ -1,8 +1,53 @@
-POST http://localhost:3003/address
+//ADD USER
+POST http://localhost:3003/users
 Content-Type: application/json
 
 {
-  "name": "10",
-  "price": 20,
-  "image_url": "https://i.imgur.com/iZmeCHP.jpg"
+  "name": "Gilead",
+  "email": "gilead@email.com",
+  "password": "123456"
 }
+
+###
+
+//SEARCH ALL USERS
+GET http://localhost:3003/users
+
+###
+
+//ADD PRODUCT
+POST http://localhost:3003/products
+Content-Type: application/json
+
+{
+  "name": "Air Jordan 1 Mid - Dark Concord",
+  "price": 10000,
+  "image_url": "https://imgur.com/Z0vSKBv"
+}
+
+###
+
+//SEARCH ALL PRODUCTS
+GET http://localhost:3003/products
+
+###
+
+//GET PRODUCT BY ID
+GET http://localhost:3003/products/1662161848940
+
+###
+
+//NEW PURCHASE
+POST http://localhost:3003/purchases
+Content-Type: application/json
+
+{
+  "user_id": "1662256270146",
+  "product_id": "1662161848940",
+  "quantity": 2
+}
+
+###
+
+//GET PRODUCT BY ID
+GET http://localhost:3003/1662256270146/purchases
