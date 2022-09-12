@@ -1,0 +1,23 @@
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+  "email": "teste2@teste.com",
+  "password": "12345678911"
+}
+
+###
+
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+  "email": "teste2@teste.com",
+  "password": "12345678911"
+}
+
+###
+
+GET http://localhost:3003/user/profile
+
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmMDM5M2MzLTRiYmMtNDMyYi04NjgxLTA5OGU1MDk2MDVjMiIsImlhdCI6MTY2MzAyMTU0NywiZXhwIjoxNjYzMDI1MTQ3fQ._XLmagnoC82AQrT48eavF53lKAN9EngQ2dV1ipIjYbk"
