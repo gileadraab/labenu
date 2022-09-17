@@ -1,0 +1,26 @@
+//SIGN UP
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+  "name": "Joao",
+  "email": "joao@joao.com",
+  "password": "12345678911"
+}
+
+###
+
+//LOGIN
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+  "email": "gilead@email.com.com",
+  "password": "12345678911"
+}
+
+###
+
+//SEARCH USERS
+GET http://localhost:3003/user/profile
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU1MjIzMDk5LWQ0ZjctNGYxYy05NDMxLWEyMTJhZWUwN2E3YiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjMzNDU1NjEsImV4cCI6MTY2MzM0OTE2MX0.B6Zjuiux73a7HlVwtl0m3zxJlBLKuwkskuYxmAPjvr0
