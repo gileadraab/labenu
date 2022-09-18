@@ -41,10 +41,22 @@ export class UserDataBase extends BaseDataBase{
 
 
   //RETORNA PROFILES
-  async searchAllUsers(){
+  searchAllUsers = async() => {
     const result: IUserDB[] = await this.getConnetion()
     .select("*")
     .from("cookenu_users")
     return result
+  }
+
+  //FOLLOW PROFILE
+  followProfile = async(followerId: string, followedId: string) =>{
+    await this.getConnetion()
+    .insert({
+      follower_id: followerId,
+      followed_id: followedId
+    }).
+    into("cookenu_followage")
+
+    return `User seguido com sucesso.`
   }
 }

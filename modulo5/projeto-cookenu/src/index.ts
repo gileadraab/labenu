@@ -1,29 +1,37 @@
 import { app } from "./app";
+import { RecipeEndpoint } from "./Endpoints/RecipesEndpoinst";
 import { UserEndpoint } from "./Endpoints/UserEndpoints";
 
-
+//USER REQUESTS
 const user = new UserEndpoint()
- 
-//SIGN UP
+//sign up
 app.post("/signup", user.signUp)
 
-//LOGIN
+//login
 app.post("/login", user.login)
 
-//GET OWN PROFILE 
-app.get("/user/:id", user.profile)
+//get own profile info
+app.get("/user/profile", user.profile)
 
-//GET OTHER PROFILES
+//get other user profile info
+app.get("/user/:id", user.getProfile)
 
-//ADD RECIPE
+//follow user
+app.post("/user/follow", user.follow)
 
-//GET RECIPE
+//unfollow user
 
-//FOLLOW USER
 
-//UNFOLLOW USER
+//RECIPE REQUESTS
+const recipe = new RecipeEndpoint()
+//add new recipe
+app.post("/recipe", recipe.newRecipe)
 
-//GET RECIPES FEED
+//get recipe
+app.get("/recipe/:id", recipe.getRecipe)
+
+
+//RECIPES FEED
 
 //USER ROLES
 

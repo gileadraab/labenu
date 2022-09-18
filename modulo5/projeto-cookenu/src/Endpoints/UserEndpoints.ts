@@ -11,6 +11,7 @@ import { NotAuthorized } from "../Error/NotAuthorized";
 import { USER_ROLES } from "../types";
 import { InvalidEmail } from "../Error/InvalidEmail";
 import { InvalidPassword } from "../Error/InvalidPassword";
+import { NotFound } from "../Error/NotFound";
 
 export class UserEndpoint {
   //ADD NEW USER
@@ -114,10 +115,9 @@ export class UserEndpoint {
     }
   }
 
-  //GET USER INFO
+  //GET OWN PROFILE
   profile = async(req: Request, res: Response) => {
     try{
-      const id = req.params.id
       const token = req.headers.authorization as string
 
       console.log(token)
@@ -129,16 +129,74 @@ export class UserEndpoint {
       const payload: TokenPayload = new Authenticator().verifyToken(token)
       console.log("payload:", payload, "token:", token)
 
-      const userData = new UserDataBase()
-
-      if (id == payload.id) {
-        const user = await userData.searchUserById(id)
-        res.status(201).send({user})  
+      if (!payload){
+        throw new NotAuthorized()
       }
 
+      const userData = new UserDataBase()
+
+      const user = await userData.searchUserById(payload.id)
+      res.status(201).send({user})  
+      
     }catch (error: any){
       res.status(500).send({message: error.message})
     }
   }   
+
+  ///GET OTHER PROFILE
+  getProfile = async(req: Request, res: Response) => {
+    try{
+      const id = req.params.id
+      const token = req.headers.authorization as string
+
+      if(!token){
+        throw new NotAuthorized()
+      }
+
+      const payload: TokenPayload = new Authenticator().verifyToken(token)
+
+      if (!payload){
+        throw new NotAuthorized()
+      }
+
+      const userData = new UserDataBase()
+    
+      const user = await userData.searchUserById(id)
+      res.status(201).send({user})  
+
+    }catch (error: any){
+      res.status(500).send({message: error.message})
+    }
+  } 
+
+
+  //FOLLOW USER
+  follow = async(req: Request, res: Response) => {
+    try{
+      const id = req.body.id
+      const token = req.headers.authorization as string
+
+      if(!token){
+        throw new NotAuthorized()
+      }
+
+      const payload: TokenPayload = new Authenticator().verifyToken(token)
+
+      const userData = new UserDataBase()
+
+      const user = await userData.searchUserById(id)
+
+      if (!user){
+        throw new NotFound()
+      }
+
+      await userData.followProfile(payload.id, id)
+      res.status(201).send({message: "Usuário seguido com suceso!"})  
+
+
+    } catch (error: any){
+      res.status(500).send({message: error.message})
+    }
+  }
 
 }

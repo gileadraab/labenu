@@ -1,5 +1,7 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU1MjIzMDk5LWQ0ZjctNGYxYy05NDMxLWEyMTJhZWUwN2E3YiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjM1NDExMzIsImV4cCI6MTY2MzU0NDczMn0.oU_DlVxwITNNrKFAv_xj8Ikf_u5mZj_MijchjKB52jc
+
 //SIGN UP
-POST http://localhost:3003/user/signup
+POST http://localhost:3003/signup
 Content-Type: application/json
 
 {
@@ -9,9 +11,8 @@ Content-Type: application/json
 }
 
 ###
-
 //LOGIN
-POST http://localhost:3003/user/login
+POST http://localhost:3003/login
 Content-Type: application/json
 
 {
@@ -20,7 +21,38 @@ Content-Type: application/json
 }
 
 ###
-
-//SEARCH USERS
+//GET OWN PROFILE
 GET http://localhost:3003/user/profile
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU1MjIzMDk5LWQ0ZjctNGYxYy05NDMxLWEyMTJhZWUwN2E3YiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjMzNDU1NjEsImV4cCI6MTY2MzM0OTE2MX0.B6Zjuiux73a7HlVwtl0m3zxJlBLKuwkskuYxmAPjvr0
+Authorization: {{token}}
+
+###
+//SEARCH USERS
+GET http://localhost:3003/user/493c9509-1f4f-47d2-8ffb-231d7762c7f3
+Authorization: {{token}}
+
+###
+//FOLLOW USER
+POST http://localhost:3003/user/follow
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "id":"493c9509-1f4f-47d2-8ffb-231d7762c7f3"
+}
+
+
+###
+//ADD RECIPE
+POST http://localhost:3003/recipe
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "title": "Bolo de Cenoura",
+  "description": "Ingredientes Massa do Bolo 3 cenouras médias (250g) 4 ovos meia xícara (chá) de óleo 2 e meia xícaras (chá) de farinha de trigo 2 xícaras (chá) de açúcar 1 colher (sopa) de fermento em pó Cobertura de Brigadeiro 1 Leite MOÇA® (lata ou caixinha) 395g 1 colher (sopa) de manteiga meia xícara (chá) de Chocolate em Pó NESTLÉ® DOIS FRADES® meia xícara (chá) de chocolate granulado Modo de preparo Massa do Bolo Em um liquidificador, bata as cenouras, os ovos e o óleo. Despeje a mistura em um recipiente e misture o açúcar e a farinha de trigo peneirada com o fermento. Coloque em uma fôrma retangular (20 x 30 cm) untada, e leve ao forno médio (180°C), preaquecido, por 40 minutos. Enquanto isso, prepare a cobertura de brigadeiro. Cobertura de Brigadeiro Em uma panela coloque o Leite MOÇA, o Chocolate em Pó DOIS FRADES e a manteiga e leve ao fogo baixo, mexendo sempre, até começar a desprender da panela. Despeje ainda quente sobre o bolo, distribua o chocolate granulado e deixe esfriar."
+}
+
+###
+//SEARCH RECIPE
+GET http://localhost:3003/recipe/9059559d-f2ac-408c-b6e9-5b2c5b33b408
+Authorization: {{token}}
