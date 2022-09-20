@@ -1,0 +1,30 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### 1) Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "Admin12345",
+    "email": "Admin12345@gmail.com",
+    "password": "abc123",
+    "role": "ADMIN"
+}
+
+### 2) Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "Admin12345@gmail.com",
+    "password": "abc123"
+}
+
+### 3) Get users
+GET http://localhost:3003/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ1Yzc2ODhkLTc0YmUtNGJmZS05NGYxLTkwZTllYWFhMWYyZSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjM2MzcyNjcsImV4cCI6MTY2MzcyMzY2N30.XpN9eYvWJRFSYOdxSjiFCVkNIZelNLPTStkY9VAsAHU
+
+### 3) Delete user
+DELETE http://localhost:3003/users/d5f62a58-5cdc-493b-a7fd-388f740a1dc7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU1MGU2ZTc0LTNlNTItNGEyYi04YTE0LWU4YWY3ZWM0YTMxOCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MzYzODk0MCwiZXhwIjoxNjYzNzI1MzQwfQ.3G36Md_rdoFXveANUaO5I2FYboXYToZApFkixXFTCAk
